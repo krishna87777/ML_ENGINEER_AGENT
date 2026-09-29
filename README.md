@@ -40,7 +40,6 @@
 6. [Limitations: where this goes wrong, including overfitting](#6-limitations-where-this-goes-wrong-including-overfitting)
 7. [How to use it yourself](#7-how-to-use-it-yourself)
 8. [References and related repos](#8-references-and-related-repos)
-9. [LinkedIn post version](#9-linkedin-post-version)
 
 ---
 
@@ -656,35 +655,3 @@ How each rule in my file maps back:
 | [lamawithonel/karpathy-autoresearch-skill](https://github.com/lamawithonel/karpathy-autoresearch-skill) | The autoresearch method packaged as an **agent skill** |
 
 *All six repos were checked to exist on GitHub on 30 Sep 2026.*
-
----
-
-## 9. LinkedIn post version
-
-> **I stopped "trying stuff" in ML. I wrote one Markdown file instead, and it ran 228 experiments for me.** 🧪
->
-> Over the last few months at MAssist, I did almost all my research work with a coding agent following one
-> 190-line instruction file: `ML_ENGINEER_AGENT.md`.
->
-> The idea is simple. It treats experiments as a **tree**, not a straight line:
-> 🌱 Start with 3 different simple ideas
-> 🔧 Fix broken ones, but give up after 3 tries
-> 📈 Always improve the current best, **one change at a time**, so you know exactly what helped
-> 📓 Log every run in a notebook (`journal.tsv`) with its parent, score and what happened
-> 🤐 Never read full training logs, only the score, so the agent stays focused for 50+ runs
->
-> What it delivered (all on laptops, all measured):
-> ⚡ **OCR:** 68–165 s/page → **~2 s/page on CPU**, 5 languages incl. handwriting; English 87.8% → 97.6%, numbers 84.3% → 98.5%
-> 🚀 **DeepSeek-OCR on a 6 GB GPU:** 98 s → **11.9 s/page (8.26×)** with byte-identical output, thanks to a custom Triton kernel
-> 🖥️ **Same model, no GPU:** PyTorch gave 0 tokens in 310 s → **72 s/page** with llama.cpp at 4.7 GB RAM
-> 🔐 **Face unlock on Android:** 20.2 s → **1.75 s**, LFW 99.85%, 0 of 2,400 photo attacks passed
-> 🛒 **Shelf audit in an 8 GB GPU slice:** fit a 235B vision model into 7.5 GB with MoE expert offload + tiling, then a 7B read 150/150 packs in **31 s at 6.46 GB**
->
-> The honest part: tree search can **overfit**. One shelf preset scored 0.98 on its tuning photo and 0.36 on a new one. A sealed test set and reading real outputs are not optional.
->
-> My biggest lesson: **most wins came from measuring, not guessing.** The GPU was 2% busy. The "slow" part
-> was never the slow part. And our own scorer was wrong twice, both times hiding real improvements.
->
-> Credits: tree search from AIDE → github.com/WecoAI/aideml · autonomy and log discipline from Karpathy's autoresearch → github.com/karpathy/autoresearch
->
-> #MachineLearning #AIagents #OCR #LLM #MLOps #Research
