@@ -4,7 +4,7 @@
 
 # ML Engineer Agent: one Markdown file, 228 experiments
 
-**A coding agent that researches like a careful scientist: one change at a time, every result written down.**
+**The protocol I use to run ML experiments with a coding agent: one change at a time, every result written down.**
 
 ![experiments](https://img.shields.io/badge/experiments-228-0f766e?style=for-the-badge)
 ![projects](https://img.shields.io/badge/research_projects-5-0969da?style=for-the-badge)
@@ -13,9 +13,10 @@
 
 </div>
 
-> **TL;DR:** I wrote one instruction file, [`ML_ENGINEER_AGENT.md`](ML_ENGINEER_AGENT.md), that turns a coding agent into a
-> careful ML researcher. It runs 20–70 small experiments per project, writes every result in a log,
-> and changes **one thing at a time** until the target is hit. Across 5 research projects it logged **228 experiments**.
+> **TL;DR:** Across 5 research projects I ran **228 experiments**. To keep them organised I wrote one protocol file,
+> [`ML_ENGINEER_AGENT.md`](ML_ENGINEER_AGENT.md), and used it with a coding agent as an assistant. The agent wrote and ran
+> the code and kept the log. I set the goals and metrics, checked the outputs myself, and decided what to keep.
+> The core rule: change **one thing at a time**, and write down every result.
 >
 > | | Before | After |
 > |---|---|---|
@@ -81,6 +82,19 @@ Think of cooking a new dish. 🍳
 | "Don't burn the kitchen" | the **hardware table** and time limit |
 
 That's it. The rest of this page covers the details, and what happened when I used it on real projects.
+
+---
+
+### Who did what
+
+The file makes the agent a fast, disciplined assistant. It doesn't replace the researcher. This is how the work was actually split:
+
+| I did | The agent did |
+|---|---|
+| Chose the problems, the hardware limits and the targets | Wrote the code for each experiment, from my plan or its own proposal |
+| Designed the metrics and eval sets, and fixed them when they turned out wrong | Ran the experiments and kept `journal.tsv` up to date |
+| Read real outputs and caught the leaks, the overfitting and the scorer bugs | Followed the tree search rules between my check-ins |
+| Decided what to keep, what to ship and when to stop | Wrote first drafts of the reports from the journal |
 
 ---
 
@@ -256,7 +270,7 @@ on a laptop CPU, in under 2 seconds per page, with no GPU and no cloud.
 5. **Clean up the mistakes** with a dictionary, and fix look-alike characters (G↔C, O↔0). A correction is **only kept if the model itself agrees** it fits.
 6. **Layout, tables and reading order**, so the output comes out as structured text.
 
-**What the agent's rules caught:**
+**What the checks caught:**
 - **Data leakage.** Some Bengali handwriting writers copied the same texts, so test text had leaked into training.
   Node 020 was marked invalid and the training data was rebuilt so no text is shared with the test set.
 - **Dictionary memorisation.** The correction dictionary had included handwriting answers. It was rebuilt from Wikipedia only.
@@ -294,7 +308,7 @@ conversions *per token*. So the model wasn't slow at maths. It was waiting on ov
 3. **"More bits" isn't always "more precise".** int8 with one scale per row was *coarser* than the 4-bit
    it replaced, and the output changed. Matching 4-bit's 64-weight blocks fixed it.
 4. **The scoring code itself had bugs**, and they were hiding real improvements. Some nodes read the handwriting
-   *better* than the reference but were scored as worse. So the agent wrote an independent checker (`truth.py`).
+   *better* than the reference but were scored as worse. So I added an independent checker (`truth.py`).
 
 Experiments that failed and were kept in the log: a smaller KV cache (cut off long pages), dropping the n-gram ban
 (slower), turning off crop mode (worse and slower), and fp16 experts (ran out of memory on 6 GB).
@@ -338,7 +352,7 @@ machine, not a tuning mistake, because the model costs a flat ~62 ms per token o
 2. **3D motion check.** Over about 1 second the SDK tracks pixels on the face with optical flow. A flat photo moves like
    one flat sheet (a single homography fits it). A real face doesn't, because the nose and cheeks move differently.
 
-**How it got 10× faster:** the agent timed every stage and found **optical flow was 96% of the total**,
+**How it got 10× faster:** I timed every stage and found **optical flow was 96% of the total**,
 while the actual face recognition took just 31 ms. Instead of cutting one setting drastically, it trimmed four settings moderately:
 points 400→200, pairs 6→3, iterations 30→12, window 21→15. Flow dropped from 16,440 ms to 1,009 ms, and the security result
 was proven unchanged against the Python reference.
@@ -354,7 +368,7 @@ with **no OpenCV**, all matching Python to 1e-4 px.
 on the **same** Qwen3-1.7B model and data, then report honestly what each one does.
 
 - **SFT won (0.210)**, but PPO, DPO, agentic and multi-turn are **statistically tied** with it.
-- The agent measured the **ceiling first**: 46% of questions have more than one correct answer, so the maximum possible
+- I measured the **ceiling first**: 46% of questions have more than one correct answer, so the maximum possible
   is about **0.45**. That makes 0.21 about 47% of what's achievable, not 21%.
 - With a plain 0/1 reward, **83% of RL groups would learn nothing**, because every sample in the group gets the same reward. A graded reward cut
   that to 0.67%, giving 6× more steps that actually teach the model something.
@@ -386,7 +400,7 @@ compression, and our budget was **8 GB**.
 
 #### Safety first: the VRAM guard
 
-Before running any experiment, the agent wrote `vram_guard.sh`:
+Before running any experiment, I set up `vram_guard.sh`:
 - It records total GPU memory, starts our command, and re-checks every **0.4 s**.
 - It measures the **increase** in total GPU memory, because Vulkan memory doesn't show up per process in `nvidia-smi`.
 - If our increase goes above **7.9 GB**, it kills **only our own processes** (`pkill -9 -g`).
@@ -419,7 +433,7 @@ llama.cpp lets you choose where each tensor goes using a regex:
 ```
 
 **The number of expert layers kept on the GPU works like a speed dial, and VRAM limits how far you can turn it.**
-The agent measured it step by step (30B, text-only benchmark):
+I measured it step by step (30B, text-only benchmark):
 
 | Expert layers on GPU | Generation speed | VRAM |
 |---|---|---|
@@ -427,7 +441,7 @@ The agent measured it step by step (30B, text-only benchmark):
 | 12 | 13.19 tok/s (+53%) | 4.88 GB |
 | 20 | 14.13 tok/s | 6.90 GB in the benchmark, but **7.74 GB with a real context**, so the guard killed it |
 
-The agent **found the ceiling by letting runs fail on purpose**, instead of guessing: 25 layers hit 9.06 GB (killed),
+I **found the ceiling by letting runs fail on purpose**, instead of guessing: 25 layers hit 9.06 GB (killed),
 16 hit 7.75 GB (killed), 12 fit, and **14 fit at 7.64 GB**.
 
 This let a **235B model write coherent text using only 5.2 GB of VRAM**, with 85 GB of experts
@@ -446,7 +460,7 @@ The first attempts sent the **whole 48-megapixel shelf photo** to the model at o
 | 235B (1.7-bit, in RAM), 6144 image tokens | **Out of memory**: the guard tripped at 8.68 GB |
 | 235B, 4096 image tokens and a smaller context | **Out of memory** at 8.14 GB |
 
-What the agent found: at an image size that fits in 8 GB, the model **can't tell 149 small packs apart**.
+What I found: at an image size that fits in 8 GB, the model **can't tell 149 small packs apart**.
 Giving it enough resolution to tell them apart pushes VRAM past 8 GB. **The 235B's base alone is ~8.5 GB.**
 
 #### Trick 2: tiling (the breakthrough)
@@ -498,7 +512,7 @@ total                               ~7.6 GB   (7.64 measured)
 #### Trick 4: switch to a small dense 7B that fits completely
 
 The 30B still had to push most of its experts to the CPU, so it couldn't go faster than ~3.6 min under 8 GB.
-The agent tried **Qwen2.5-VL-7B**, a dense 4.7 GB model where **every layer fits on the GPU**. It ran at ~61 tok/s at 6.46 GB.
+I tried **Qwen2.5-VL-7B**, a dense 4.7 GB model where **every layer fits on the GPU**. It ran at ~61 tok/s at 6.46 GB.
 First run: 0.94 / 0.92 in 68 s. Then **12 experiments, one change each**:
 
 | # | One change | Similarity | Brand F1 | Time | Verdict |
@@ -528,7 +542,7 @@ First run: 0.94 / 0.92 in 68 s. Then **12 experiments, one change each**:
 #### Honest status (what is not solved)
 
 - The 0.98 was measured on **one clean shelf with the brand list given**. The same settings on the handwash photo scored **0.36 / 0.41**, so a preset tuned on one image doesn't carry over.
-- On real uploads **with no brand list**: shelf structure is now exact (7 of 7 shelves, after the agent found a **Python geometry bug**, not a model bug), but brand reading is **0.765 / 0.64**. The 7B makes up brand names from scent and colour words.
+- On real uploads **with no brand list**: shelf structure is now exact (7 of 7 shelves, after I found a **Python geometry bug**, not a model bug), but brand reading is **0.765 / 0.64**. The 7B makes up brand names from scent and colour words.
 - Runs are **not repeatable even at temperature 0**, because the server's 4 slots batch tiles differently each time: the same image took 35 s once and 90 s another time. Compare with `--parallel 1` or average 3 runs.
 - **Most useful lesson from this project:** the numbers looked great (99% named) while one "shelf" in the report held 54 boxes.
   **Never accept a metric without checking a few rows by eye.**

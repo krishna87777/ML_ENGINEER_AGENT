@@ -69,7 +69,7 @@ def hero():
     body = []
     body.append('<text x="40" y="62" class="ink" font-size="30" font-weight="700">One Markdown file.</text>')
     body.append('<text x="40" y="100" class="teal" font-size="30" font-weight="700">228 experiments.</text>')
-    body.append('<text x="40" y="136" class="mut" font-size="16">A coding agent that researches like a careful scientist:</text>')
+    body.append('<text x="40" y="136" class="mut" font-size="16">How I run ML experiments with a coding agent:</text>')
     body.append('<text x="40" y="160" class="mut" font-size="16">one change at a time, every result written down.</text>')
     # pill badges
     for i, (t, c) in enumerate([("5 projects", "blue"), ("6 GB laptop GPU", "amber"), ("0 guessed numbers", "green")]):
