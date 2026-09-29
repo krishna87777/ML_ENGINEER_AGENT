@@ -98,6 +98,27 @@ The file makes the agent a fast, disciplined assistant. It doesn't replace the r
 
 ---
 
+### How this started
+
+I was reading the [AIDE paper](https://arxiv.org/abs/2502.13138) from WecoAI. Instead of improving one script in a straight line,
+AIDE searches a **tree of solutions**, a graph where every experiment is a node:
+
+- Each node is one complete Python script with a score.
+- A new idea is a **child node**: a copy of its parent with one change.
+- A crash becomes a **debug node** under the script that crashed.
+- The score decides which node to grow next. Weak branches are simply left behind, not undone.
+
+According to the AIDE README, OpenAI's MLE-bench found this tree search won **4× more medals** than the best linear agent.
+Around the same time I read Karpathy's [autoresearch](https://github.com/karpathy/autoresearch), where an agent runs a
+fixed-budget training loop by itself, only greps the metric, and keeps going without asking.
+
+So I asked myself: **why not do something like this for my own research?** My problems weren't Kaggle competitions. They were
+OCR, face verification and vision models on a 6 GB laptop GPU and a shared server. So I combined the two ideas into one Markdown
+file that any coding agent can follow, and added the parts I kept needing myself: a hardware interview before any code,
+a journal with parent links, a fixed order for fixing out-of-memory errors, and reports built only from logged numbers.
+
+---
+
 ## 1. The problem with "just try stuff"
 
 When an AI agent (or a person) does ML experiments without rules, you usually see the same failures:
@@ -620,7 +641,7 @@ REPEAT: never stop until budget exhausted -> best_solution.py + REPORT.md
 
 | Repo | What it is | What I took from it |
 |---|---|---|
-| [**WecoAI/aideml**](https://github.com/WecoAI/aideml) (AIDE) | An LLM agent for ML engineering, built around **agentic tree search**: every Python solution is a node, and every new patch is a child node | The solution tree; the draft / improve / debug stages; parent → child experiments; metric-guided choice of the next step; "the LLM writes the whole ML script" |
+| [**WecoAI/aideml**](https://github.com/WecoAI/aideml) (AIDE) · [paper](https://arxiv.org/abs/2502.13138) | An LLM agent for ML engineering, built around **agentic tree search**: every Python solution is a node, and every new patch is a child node | The solution tree; the draft / improve / debug stages; parent → child experiments; metric-guided choice of the next step; "the LLM writes the whole ML script" |
 | [**karpathy/autoresearch**](https://github.com/karpathy/autoresearch) | AI agents running research on single-GPU nanochat training automatically, driven by one `program.md` | Fixed ~5-minute budget per run; redirect output to a log; `grep` the metric; `tail -50` only on failure; keep what helps and revert what doesn't; record every run; **keep going without asking the human** |
 
 How each rule in my file maps back:
