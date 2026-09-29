@@ -112,6 +112,14 @@ According to the AIDE README, OpenAI's MLE-bench found this tree search won **4Ã
 Around the same time I read Karpathy's [autoresearch](https://github.com/karpathy/autoresearch), where an agent runs a
 fixed-budget training loop by itself, only greps the metric, and keeps going without asking.
 
+Both were great, but neither fit my work on its own:
+
+- **AIDE** has the right search, but it runs as its own package and is shaped around Kaggle-style tasks.
+  I wanted a plain file that any coding agent could follow inside my own project.
+- **autoresearch** has the right discipline, but its loop is a straight line: keep if better, revert if worse.
+  There are no branches and no debug path, so it can get stuck on its first idea.
+- **Neither** started by asking about hardware, and hardware was always my biggest limit.
+
 So I asked myself: **why not do something like this for my own research?** My problems weren't Kaggle competitions. They were
 OCR, face verification and vision models on a 6 GB laptop GPU and a shared server. So I combined the two ideas into one Markdown
 file that any coding agent can follow, and added the parts I kept needing myself: a hardware interview before any code,
