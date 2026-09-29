@@ -24,8 +24,25 @@
 > | 🛒 Shelf audit in an 8 GB GPU slice | 235B model won't fit | **7B: 31 s at 6.46 GB** |
 > | 🔐 Face check on an Android phone | 20.2 s | **1.75 s** |
 >
-> Every number comes from an experiment log (`journal.tsv`) or report. Nothing is estimated.
+> Every number comes from each project's experiment log (`journal.tsv`) or report. Nothing is estimated.
+> The logs themselves aren't in this repo, because they contain company and student data.
 > This covers **research work only**. Nothing here comes from calling a paid API.
+
+### ⚡ Quick start
+
+```bash
+mkdir my-task && cd my-task && mkdir input            # put your data in ./input
+curl -O https://raw.githubusercontent.com/krishna87777/ML_ENGINEER_AGENT/main/ML_ENGINEER_AGENT.md
+# open your coding agent here and say:  "Read ML_ENGINEER_AGENT.md and follow it exactly."
+```
+
+Full guide: **[HOW_TO_USE.md](HOW_TO_USE.md)**
+
+| File | What it is |
+|---|---|
+| [`ML_ENGINEER_AGENT.md`](ML_ENGINEER_AGENT.md) | The protocol: the file you give to the agent |
+| [`HOW_TO_USE.md`](HOW_TO_USE.md) | Step-by-step usage, checks and common problems |
+| `assets/` | Animated diagrams (`make_svgs.py` regenerates them) |
 
 ---
 
@@ -37,7 +54,7 @@
 3. [The algorithm: tree search over experiments](#3-the-algorithm-tree-search-over-experiments)
 4. [Before & after: results by project](#4-before--after-results-by-project)
 5. [Lessons that kept coming back](#5-lessons-that-kept-coming-back)
-6. [Limitations: where this goes wrong, including overfitting](#6-limitations-where-this-goes-wrong-including-overfitting)
+6. [Limitations](#6-limitations)
 7. [How to use it yourself](#7-how-to-use-it-yourself)
 8. [References and related repos](#8-references-and-related-repos)
 
@@ -530,62 +547,26 @@ First run: 0.94 / 0.92 in 68 s. Then **12 experiments, one change each**:
 
 ---
 
-## 6. Limitations: where this goes wrong, including overfitting
+## 6. Limitations
 
-The agent is a very hard-working junior researcher. It is **not** a replacement for judgement. These are the real problems I hit, in simple words.
+The agent is a hard-working junior researcher, **not** a replacement for judgement. These are the real problems I hit.
 
 <p align="center"><img src="assets/overfitting.svg" alt="Overfitting" width="95%"/></p>
 
-### 6.1 Overfitting: it can memorise the test instead of learning ⚠️
-
-**What overfitting means:** the solution gets very good at the exact data it was tuned on, and then fails on new data.
-It's like a student who practised the same mock paper 50 times. They ace *that* paper, but the real exam is different.
-
-Tree search makes this **more likely**, not less. It tries 20–70 ideas and keeps the one with the best dev score. Some of that
-"best" is real, and some of it is luck on that particular dev set. The more experiments you run on the same set, the bigger that luck gets.
-
-Where it actually happened:
-
-| Project | What happened | Plain meaning |
-|---|---|---|
-| 🛒 Shelf audit | The preset tuned on the dishwash photo scored **0.98**. The same settings on the handwash photo scored **0.36 / 0.41** | It learned "this one photo", not "shelves" |
-| 🛒 Shelf audit | With the brand list given: 0.98. With no brand list on real uploads: **0.765 / 0.64** | The brand list was quietly doing much of the work |
-| 📄 OCR | Bengali handwriting writers copied the same texts, so test sentences **leaked into training**. Experiment 020 looked great and was marked **invalid** | It had seen the answers before the exam |
-| 📄 OCR | The spell-check dictionary had been built partly from handwriting answers | Same thing: memorising, not reading |
-| 🧠 RL study | Training reward went **up** (0.381 → 0.421) while real accuracy went **down** (0.163 → 0.138) | The model "overfit to the reward" (reward hacking) |
-
-**How to protect yourself:**
-1. **Keep a sealed test set.** Never show it to the search. Open it **once**, at the end.
-2. **Test on something truly new**: a new photo, a new document type, a new font. Don't just take a new slice of the same data.
-3. **Split by source, not by row**: by question, by writer, by document. Otherwise near-copies land on both sides.
-4. **Check a few outputs by eye.** Every big mistake here (54 boxes on one "shelf", the reward hack) was caught by reading real outputs, not by the metric.
-
-### 6.2 It is only as good as the metric 🎯
-
-The agent optimises exactly what you measure, and nothing else. In DeepSeek-OCR, the scorer compared against a reference that had **two
-mistakes of its own**, so better transcriptions were scored as *failures*.
-**If the metric is wrong, the agent will confidently climb the wrong hill.**
-
-### 6.3 Small eval sets make noisy winners 🎲
-
-- DeepSeek-OCR was tuned on **3 pages**.
-- The post-training study had ~100 test rows, so every score is **±5 points**, and SFT, PPO, DPO and agentic RL are
-  actually a **statistical tie**, even though a table shows them in "ranks".
-- Most winners were run with **one random seed**. A lead smaller than the noise isn't a result until it's repeated with ~3 seeds.
-
-### 6.4 Results are not always repeatable 🔁
-
-Even at temperature 0, the shelf pipeline gave **35 s / 0.765** on one run and **90 s / 0.673** on the next, because the server
-batched tiles differently. Timings on shared machines moved by 2×. Compare with `--parallel 1` or average 3 runs.
-
-### 6.5 Other honest limits
-
-- **One change at a time is slow** when two changes only help *together*. For example, the crop size only helped when the tile size changed with it.
-- **The 5-minute budget doesn't fit big training.** Each OCR recogniser training round took ~2.5 hours, so the budget rules had to be bent by hand.
-- **The agent can't choose the goal.** A human still decides what "good" means, which data is fair, when to stop, and whether a completely different approach would be simpler.
-- **The hardware table and the "debug on odd steps" rule are rules of thumb**, not laws. In one case the agent's own measurements
-  corrected its prior: 12 CPU threads beat the predicted 4.
-- **It costs compute and attention.** 228 experiments is a lot of GPU time, and someone still needs to read the journal.
+- **⚠️ It can overfit.** It tries dozens of ideas on one dev set and keeps the best, so part of that "best" is luck on that set.
+  A shelf preset scored **0.98 on its tuning photo and 0.36 on a new one**. In OCR, copied Bengali texts leaked test sentences into
+  training, and that experiment was marked invalid.
+  → *Keep a sealed test set, open it once at the end, and split data by source (writer, document), not by row.*
+- **🎯 It is only as good as the metric.** A scorer with its own mistakes made better OCR transcriptions look like failures,
+  and in the RL study, reward went up while real accuracy went down (reward hacking).
+  → *Read 10–20 real outputs by eye. The biggest bugs here were caught that way, not by the metric.*
+- **🎲 Small eval sets give noisy winners.** DeepSeek-OCR was tuned on 3 pages, and the RL study's ~100 rows mean ±5 points.
+  → *Re-run close winners with 2–3 seeds before calling it a result.*
+- **🔁 Runs aren't always repeatable.** The same shelf image took 35 s once and 90 s the next time, even at temperature 0.
+  → *Fix seeds and server slots (`--parallel 1`), or average 3 runs.*
+- **🐢 One change at a time is slow** when two changes only help together, and the 5-minute budget doesn't fit long training runs.
+  → *Raise the budget for big runs, and allow a paired change when the log shows the two changes are linked.*
+- **🧭 It can't choose the goal.** A human still decides what "good" means, which data is fair, and when to stop.
 
 ---
 
