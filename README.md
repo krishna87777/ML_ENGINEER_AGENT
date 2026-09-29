@@ -365,29 +365,22 @@ machine, not a tuning mistake, because the model costs a flat ~62 ms per token o
 
 ### 4.3 Face recognition and anti-spoofing SDK for Android
 
-**Goal:** replace a paid face SDK with our own that runs **fully on the phone**, with no internet.
+> This SDK is **in production**, so only the results and top-level settings are shared here. The method and the step-by-step experiments are kept private.
 
-| Metric | Result |
+**Summary:** an on-device face verification SDK with anti-spoofing that replaced a paid third-party SDK. It runs fully on the phone, with no internet.
+
+| Parameter | Value |
 |---|---|
+| Platform | Android (arm64), fully offline |
+| Experiments logged | 57 |
 | Face verification (LFW, 6,000 pairs) | **99.85 % ± 0.17 %** |
 | Cross-age (AgeDB-30, 30-year gaps) | **96.39 %** |
-| Photo/screen attacks reaching "live" | **0.0000 % of 2,400** |
+| Photo/screen attacks reaching "live" | **0 of 2,400** |
 | Full verification on phone | 20.2 s → **1.75 s** |
 | Automated tests | 50 distinct, 0 failures |
 
-**How the anti-spoofing works:** it uses two independent checks.
-1. **Texture check.** A small CNN looks for signs of a screen or print. It was retrained after a
-   "phone held close" bug, using zoomed-in training images.
-2. **3D motion check.** Over about 1 second the SDK tracks pixels on the face with optical flow. A flat photo moves like
-   one flat sheet (a single homography fits it). A real face doesn't, because the nose and cheeks move differently.
-
-**How it got 10× faster:** I timed every stage and found **optical flow was 96% of the total**,
-while the actual face recognition took just 31 ms. Instead of cutting one setting drastically, it trimmed four settings moderately:
-points 400→200, pairs 6→3, iterations 30→12, window 21→15. Flow dropped from 16,440 ms to 1,009 ms, and the security result
-was proven unchanged against the Python reference.
-
-It also replaced a **137 MB 3D-landmark model** with an averaged face-depth profile and ported the whole pipeline to pure Kotlin
-with **no OpenCV**, all matching Python to 1e-4 px.
+**Key takeaway:** profiling showed most of the time went to one stage, not to recognition itself. Tuning that stage gave the ~11× speed-up,
+and the security result was verified unchanged against the reference implementation.
 
 ---
 
