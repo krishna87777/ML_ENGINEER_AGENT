@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 376" width="940" height="376" role="img" aria-label="Before and after"><title>Before and after</title><style>
+.bg{fill:#f6f8fa}.card{fill:#ffffff;stroke:#d0d7de}
+.ink{fill:#1f2328}.mut{fill:#656d76}.line{stroke:#8c959f}
+.teal{fill:#0f766e}.tealS{stroke:#0f766e}.tealBg{fill:#d1f4ef}
+.amber{fill:#b45309}.amberS{stroke:#b45309}.amberBg{fill:#fdecc8}
+.red{fill:#cf222e}.redS{stroke:#cf222e}.redBg{fill:#ffe1e1}
+.green{fill:#1a7f37}.greenS{stroke:#1a7f37}.greenBg{fill:#dafbe1}
+.blue{fill:#0969da}.blueS{stroke:#0969da}.blueBg{fill:#ddf4ff}
+.grey{fill:#afb8c1}.greyBg{fill:#eaeef2}
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.sx{transform-box:fill-box;transform-origin:0 50%}
+@media (prefers-color-scheme: dark){
+.bg{fill:#0d1117}.card{fill:#161b22;stroke:#30363d}
+.ink{fill:#e6edf3}.mut{fill:#8b949e}.line{stroke:#6e7681}
+.teal{fill:#2dd4bf}.tealS{stroke:#2dd4bf}.tealBg{fill:#0b3b36}
+.amber{fill:#f5a524}.amberS{stroke:#f5a524}.amberBg{fill:#3d2a0a}
+.red{fill:#ff7b72}.redS{stroke:#ff7b72}.redBg{fill:#4a1717}
+.green{fill:#3fb950}.greenS{stroke:#3fb950}.greenBg{fill:#12361d}
+.blue{fill:#58a6ff}.blueS{stroke:#58a6ff}.blueBg{fill:#0c2d4a}
+.grey{fill:#484f58}.greyBg{fill:#21262d}
+}
+.w{animation-duration:8s;animation-iteration-count:infinite;animation-timing-function:cubic-bezier(.6,0,.2,1)}@keyframes w0{0%,15%{transform:scaleX(1)}55%,92%{transform:scaleX(0.0143)}100%{transform:scaleX(1)}}@keyframes wc0{0%,15%{fill:#cf222e}55%,92%{fill:#1a7f37}100%{fill:#cf222e}}@keyframes wx0{0%,50%{opacity:0}58%,92%{opacity:1}100%{opacity:0}}@keyframes w1{0%,15%{transform:scaleX(1)}55%,92%{transform:scaleX(0.1211)}100%{transform:scaleX(1)}}@keyframes wc1{0%,15%{fill:#cf222e}55%,92%{fill:#1a7f37}100%{fill:#cf222e}}@keyframes wx1{0%,50%{opacity:0}58%,92%{opacity:1}100%{opacity:0}}@keyframes w2{0%,15%{transform:scaleX(1)}55%,92%{transform:scaleX(0.0866)}100%{transform:scaleX(1)}}@keyframes wc2{0%,15%{fill:#cf222e}55%,92%{fill:#1a7f37}100%{fill:#cf222e}}@keyframes wx2{0%,50%{opacity:0}58%,92%{opacity:1}100%{opacity:0}}@keyframes w3{0%,15%{transform:scaleX(1)}55%,92%{transform:scaleX(0.1438)}100%{transform:scaleX(1)}}@keyframes wc3{0%,15%{fill:#cf222e}55%,92%{fill:#1a7f37}100%{fill:#cf222e}}@keyframes wx3{0%,50%{opacity:0}58%,92%{opacity:1}100%{opacity:0}}</style><rect class="bg" width="940" height="376" rx="14"/><text x="30" y="32" class="mut" font-size="13" font-weight="600">BEFORE → AFTER (time, shorter is better)</text><text x="30" y="82" class="ink" font-size="14" font-weight="700">Multilingual OCR (CPU)</text><text x="30" y="102" class="mut" font-size="12">68–165 s → ~2 s</text><rect x="260" y="70" width="560" height="30" rx="8" class="greyBg"/><rect class="w sx" x="260" y="70" height="30" rx="8" width="560" style="animation-name:w0,wc0;animation-delay:0.0s"/><g class="w" style="animation-name:wx0;animation-delay:0.0s;opacity:0"><text x="840" y="92" class="green" font-size="20" font-weight="800">35–80×</text></g><text x="30" y="156" class="ink" font-size="14" font-weight="700">DeepSeek-OCR (6 GB GPU)</text><text x="30" y="176" class="mut" font-size="12">98.25 s → 11.90 s</text><rect x="260" y="144" width="560" height="30" rx="8" class="greyBg"/><rect class="w sx" x="260" y="144" height="30" rx="8" width="560" style="animation-name:w1,wc1;animation-delay:0.15s"/><g class="w" style="animation-name:wx1;animation-delay:0.15s;opacity:0"><text x="840" y="166" class="green" font-size="20" font-weight="800">8.26×</text></g><text x="30" y="230" class="ink" font-size="14" font-weight="700">Face verification (phone)</text><text x="30" y="250" class="mut" font-size="12">20.2 s → 1.75 s</text><rect x="260" y="218" width="560" height="30" rx="8" class="greyBg"/><rect class="w sx" x="260" y="218" height="30" rx="8" width="560" style="animation-name:w2,wc2;animation-delay:0.3s"/><g class="w" style="animation-name:wx2;animation-delay:0.3s;opacity:0"><text x="840" y="240" class="green" font-size="20" font-weight="800">11.5×</text></g><text x="30" y="304" class="ink" font-size="14" font-weight="700">Shelf audit under 8 GB</text><text x="30" y="324" class="mut" font-size="12">217 s (30B) → 31 s (7B)</text><rect x="260" y="292" width="560" height="30" rx="8" class="greyBg"/><rect class="w sx" x="260" y="292" height="30" rx="8" width="560" style="animation-name:w3,wc3;animation-delay:0.44999999999999996s"/><g class="w" style="animation-name:wx3;animation-delay:0.44999999999999996s;opacity:0"><text x="840" y="314" class="green" font-size="20" font-weight="800">7×</text></g></svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 360" width="940" height="360" role="img" aria-label="Overfitting"><title>Overfitting</title><style>
+.bg{fill:#f6f8fa}.card{fill:#ffffff;stroke:#d0d7de}
+.ink{fill:#1f2328}.mut{fill:#656d76}.line{stroke:#8c959f}
+.teal{fill:#0f766e}.tealS{stroke:#0f766e}.tealBg{fill:#d1f4ef}
+.amber{fill:#b45309}.amberS{stroke:#b45309}.amberBg{fill:#fdecc8}
+.red{fill:#cf222e}.redS{stroke:#cf222e}.redBg{fill:#ffe1e1}
+.green{fill:#1a7f37}.greenS{stroke:#1a7f37}.greenBg{fill:#dafbe1}
+.blue{fill:#0969da}.blueS{stroke:#0969da}.blueBg{fill:#ddf4ff}
+.grey{fill:#afb8c1}.greyBg{fill:#eaeef2}
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.sx{transform-box:fill-box;transform-origin:0 50%}
+@media (prefers-color-scheme: dark){
+.bg{fill:#0d1117}.card{fill:#161b22;stroke:#30363d}
+.ink{fill:#e6edf3}.mut{fill:#8b949e}.line{stroke:#6e7681}
+.teal{fill:#2dd4bf}.tealS{stroke:#2dd4bf}.tealBg{fill:#0b3b36}
+.amber{fill:#f5a524}.amberS{stroke:#f5a524}.amberBg{fill:#3d2a0a}
+.red{fill:#ff7b72}.redS{stroke:#ff7b72}.redBg{fill:#4a1717}
+.green{fill:#3fb950}.greenS{stroke:#3fb950}.greenBg{fill:#12361d}
+.blue{fill:#58a6ff}.blueS{stroke:#58a6ff}.blueBg{fill:#0c2d4a}
+.grey{fill:#484f58}.greyBg{fill:#21262d}
+}
+.o{animation-duration:10s;animation-iteration-count:infinite;animation-timing-function:ease-out}@keyframes ob0{0%,10%{transform:scaleX(0)}45%,90%{transform:scaleX(1)}100%{transform:scaleX(0)}}@keyframes ob1{0%,10%{transform:scaleX(0)}45%,90%{transform:scaleX(1)}100%{transform:scaleX(0)}}@keyframes ob2{0%,10%{transform:scaleX(0)}45%,90%{transform:scaleX(1)}100%{transform:scaleX(0)}}</style><rect class="bg" width="940" height="360" rx="14"/><text x="30" y="32" class="mut" font-size="13" font-weight="600">OVERFITTING — WHEN THE SEARCH MEMORISES THE TEST</text><rect x="30" y="54" width="380" height="270" rx="12" class="card"/><text x="50" y="86" class="ink" font-size="16" font-weight="700">The student analogy</text><text x="50" y="116" class="mut" font-size="13.5">Practise 50 times on the SAME mock paper,</text><text x="50" y="138" class="mut" font-size="13.5">keep whatever scored best, and you will ace</text><text x="50" y="160" class="mut" font-size="13.5">that paper — maybe because you memorised it.</text><text x="50" y="182" class="mut" font-size="13.5"></text><text x="50" y="204" class="mut" font-size="13.5">Tree search does the same: 50 experiments,</text><text x="50" y="226" class="mut" font-size="13.5">all scored on ONE dev set. The winner is</text><text x="50" y="248" class="mut" font-size="13.5">partly "best at this dev set", not "best".</text><text x="50" y="300" class="teal" font-size="13.5" font-weight="700">Fix: a sealed test set, opened once at the end.</text><text x="470" y="70" class="ink" font-size="13" font-weight="600">Shelf preset, tuned on the dishwash photo</text><rect x="470" y="78" width="380" height="24" rx="7" class="greyBg"/><rect class="o sx green" x="470" y="78" height="24" rx="7" width="372.4" style="animation-name:ob0;animation-delay:0.0s"/><text x="842" y="96" text-anchor="end" class="ink" font-size="13" font-weight="800">0.98</text><text x="470" y="136" class="ink" font-size="13" font-weight="600">Same preset, new photo (handwash)</text><rect x="470" y="144" width="380" height="24" rx="7" class="greyBg"/><rect class="o sx red" x="470" y="144" height="24" rx="7" width="136.8" style="animation-name:ob1;animation-delay:0.9s"/><text x="842" y="162" text-anchor="end" class="ink" font-size="13" font-weight="800">0.36</text><text x="470" y="224" class="ink" font-size="13" font-weight="600">Real uploads, no brand list given</text><rect x="470" y="232" width="380" height="24" rx="7" class="greyBg"/><rect class="o sx amber" x="470" y="232" height="24" rx="7" width="290.7" style="animation-name:ob2;animation-delay:1.8s"/><text x="842" y="250" text-anchor="end" class="ink" font-size="13" font-weight="800">0.765</text><text x="470" y="178" class="red" font-size="12.5" font-weight="700">↑ overfit: 0.98 → 0.36 on a photo it never saw</text><text x="470" y="266" class="amber" font-size="12.5" font-weight="700">↑ the brand list was quietly doing part of the work</text><text x="470" y="306" class="teal" font-size="13" font-weight="700">Always score on photos the search never saw.</text></svg>

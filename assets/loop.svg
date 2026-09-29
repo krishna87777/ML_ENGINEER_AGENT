@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 410" width="900" height="410" role="img" aria-label="The experiment loop"><title>The experiment loop</title><style>
+.bg{fill:#f6f8fa}.card{fill:#ffffff;stroke:#d0d7de}
+.ink{fill:#1f2328}.mut{fill:#656d76}.line{stroke:#8c959f}
+.teal{fill:#0f766e}.tealS{stroke:#0f766e}.tealBg{fill:#d1f4ef}
+.amber{fill:#b45309}.amberS{stroke:#b45309}.amberBg{fill:#fdecc8}
+.red{fill:#cf222e}.redS{stroke:#cf222e}.redBg{fill:#ffe1e1}
+.green{fill:#1a7f37}.greenS{stroke:#1a7f37}.greenBg{fill:#dafbe1}
+.blue{fill:#0969da}.blueS{stroke:#0969da}.blueBg{fill:#ddf4ff}
+.grey{fill:#afb8c1}.greyBg{fill:#eaeef2}
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.sx{transform-box:fill-box;transform-origin:0 50%}
+@media (prefers-color-scheme: dark){
+.bg{fill:#0d1117}.card{fill:#161b22;stroke:#30363d}
+.ink{fill:#e6edf3}.mut{fill:#8b949e}.line{stroke:#6e7681}
+.teal{fill:#2dd4bf}.tealS{stroke:#2dd4bf}.tealBg{fill:#0b3b36}
+.amber{fill:#f5a524}.amberS{stroke:#f5a524}.amberBg{fill:#3d2a0a}
+.red{fill:#ff7b72}.redS{stroke:#ff7b72}.redBg{fill:#4a1717}
+.green{fill:#3fb950}.greenS{stroke:#3fb950}.greenBg{fill:#12361d}
+.blue{fill:#58a6ff}.blueS{stroke:#58a6ff}.blueBg{fill:#0c2d4a}
+.grey{fill:#484f58}.greyBg{fill:#21262d}
+}
+.s{animation-duration:10s;animation-iteration-count:infinite}@keyframes g0{0%,0.0%{opacity:.35}3.0%,17.0%{opacity:1}20.0%,100%{opacity:.35}}@keyframes g1{0%,19.9%{opacity:.35}23.0%,37.0%{opacity:1}40.0%,100%{opacity:.35}}@keyframes g2{0%,39.9%{opacity:.35}43.0%,57.0%{opacity:1}60.0%,100%{opacity:.35}}@keyframes g3{0%,59.9%{opacity:.35}63.0%,77.0%{opacity:1}80.0%,100%{opacity:.35}}@keyframes g4{0%,79.9%{opacity:.35}83.0%,97.0%{opacity:1}100.0%,100%{opacity:.35}}</style><rect class="bg" width="900" height="410" rx="14"/><text x="30" y="30" class="mut" font-size="13" font-weight="600">THE LOOP — IT NEVER STOPS UNTIL THE BUDGET RUNS OUT</text><circle cx="450" cy="225" r="130" fill="none" class="line" stroke-width="2" stroke-dasharray="4 7"/><g class="s" style="animation-name:g0"><circle cx="450.0" cy="95.0" r="13" class="teal"/><text x="450.0" y="99.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">1</text><text x="450.0" y="61.0" text-anchor="middle" class="ink" font-size="15" font-weight="700">Pick</text><text x="450.0" y="79.0" text-anchor="middle" class="mut mono" font-size="11.5">follow the 4 rules</text></g><g class="s" style="animation-name:g1"><circle cx="573.6" cy="184.8" r="13" class="teal"/><text x="573.6" y="189.3" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">2</text><text x="678.6" y="180.8" text-anchor="middle" class="ink" font-size="15" font-weight="700">Change ONE thing</text><text x="678.6" y="198.8" text-anchor="middle" class="mut mono" font-size="11.5">write sol_023.py</text></g><g class="s" style="animation-name:g2"><circle cx="526.4" cy="330.2" r="13" class="teal"/><text x="526.4" y="334.7" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">3</text><text x="631.4" y="326.2" text-anchor="middle" class="ink" font-size="15" font-weight="700">Run</text><text x="631.4" y="344.2" text-anchor="middle" class="mut mono" font-size="11.5">log → file, not screen</text></g><g class="s" style="animation-name:g3"><circle cx="373.6" cy="330.2" r="13" class="teal"/><text x="373.6" y="334.7" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">4</text><text x="268.6" y="326.2" text-anchor="middle" class="ink" font-size="15" font-weight="700">Read the score</text><text x="268.6" y="344.2" text-anchor="middle" class="mut mono" font-size="11.5">grep, tail -50 if crash</text></g><g class="s" style="animation-name:g4"><circle cx="326.4" cy="184.8" r="13" class="teal"/><text x="326.4" y="189.3" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">5</text><text x="221.4" y="180.8" text-anchor="middle" class="ink" font-size="15" font-weight="700">Write it down</text><text x="221.4" y="198.8" text-anchor="middle" class="mut mono" font-size="11.5">journal.tsv + git commit</text></g><circle r="7" class="amber"><animateMotion dur="10s" repeatCount="indefinite" path="M450,95 a130,130 0 1,1 -0.01,0"/></circle><text x="450" y="219" text-anchor="middle" class="ink" font-size="20" font-weight="800">no</text><text x="450" y="243" text-anchor="middle" class="ink" font-size="20" font-weight="800">"may I continue?"</text></svg>

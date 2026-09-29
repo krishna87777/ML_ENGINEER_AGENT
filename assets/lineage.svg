@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 330" width="940" height="330" role="img" aria-label="Lineage of ML_ENGINEER_AGENT.md"><title>Lineage of ML_ENGINEER_AGENT.md</title><style>
+.bg{fill:#f6f8fa}.card{fill:#ffffff;stroke:#d0d7de}
+.ink{fill:#1f2328}.mut{fill:#656d76}.line{stroke:#8c959f}
+.teal{fill:#0f766e}.tealS{stroke:#0f766e}.tealBg{fill:#d1f4ef}
+.amber{fill:#b45309}.amberS{stroke:#b45309}.amberBg{fill:#fdecc8}
+.red{fill:#cf222e}.redS{stroke:#cf222e}.redBg{fill:#ffe1e1}
+.green{fill:#1a7f37}.greenS{stroke:#1a7f37}.greenBg{fill:#dafbe1}
+.blue{fill:#0969da}.blueS{stroke:#0969da}.blueBg{fill:#ddf4ff}
+.grey{fill:#afb8c1}.greyBg{fill:#eaeef2}
+text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+.sx{transform-box:fill-box;transform-origin:0 50%}
+@media (prefers-color-scheme: dark){
+.bg{fill:#0d1117}.card{fill:#161b22;stroke:#30363d}
+.ink{fill:#e6edf3}.mut{fill:#8b949e}.line{stroke:#6e7681}
+.teal{fill:#2dd4bf}.tealS{stroke:#2dd4bf}.tealBg{fill:#0b3b36}
+.amber{fill:#f5a524}.amberS{stroke:#f5a524}.amberBg{fill:#3d2a0a}
+.red{fill:#ff7b72}.redS{stroke:#ff7b72}.redBg{fill:#4a1717}
+.green{fill:#3fb950}.greenS{stroke:#3fb950}.greenBg{fill:#12361d}
+.blue{fill:#58a6ff}.blueS{stroke:#58a6ff}.blueBg{fill:#0c2d4a}
+.grey{fill:#484f58}.greyBg{fill:#21262d}
+}
+.p{animation-duration:6s;animation-iteration-count:infinite}@keyframes flow{to{stroke-dashoffset:-24}}.f{stroke-dasharray:8 4;animation:flow 1s linear infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.75}}</style><rect class="bg" width="940" height="330" rx="14"/><text x="30" y="32" class="mut" font-size="13" font-weight="600">WHERE THE IDEAS COME FROM</text><rect x="40" y="70" width="300" height="106" rx="12" class="blueBg blueS" stroke-width="1.5"/><text x="56" y="96" class="blue" font-size="15" font-weight="800">AIDE</text><text x="56" y="114" class="blue mono" font-size="11.5">github.com/WecoAI/aideml</text><text x="56" y="136" class="ink" font-size="12.5">• tree of solutions</text><text x="56" y="152" class="ink" font-size="12.5">• draft · improve · debug</text><text x="56" y="168" class="ink" font-size="12.5">• metric-guided search</text><rect x="40" y="200" width="300" height="106" rx="12" class="amberBg amberS" stroke-width="1.5"/><text x="56" y="226" class="amber" font-size="15" font-weight="800">autoresearch</text><text x="56" y="244" class="amber mono" font-size="11.5">github.com/karpathy/autoresearch</text><text x="56" y="266" class="ink" font-size="12.5">• fixed 5-min budget</text><text x="56" y="282" class="ink" font-size="12.5">• log → grep → tail -50</text><text x="56" y="298" class="ink" font-size="12.5">• never-stop loop, git</text><path class="f blueS" d="M340,123 C440,123 460,170 560,170" fill="none" stroke-width="3"/><path class="f amberS" d="M340,253 C440,253 460,200 560,200" fill="none" stroke-width="3"/><rect x="560" y="120" width="340" height="130" rx="14" class="tealBg tealS" stroke-width="2"/><text x="730" y="152" text-anchor="middle" class="teal" font-size="18" font-weight="800">ML_ENGINEER_AGENT.md</text><text x="730" y="178" text-anchor="middle" class="ink" font-size="12.5">+ Phase-0 hardware interview &amp; table</text><text x="730" y="197" text-anchor="middle" class="ink" font-size="12.5">+ journal.tsv with parent links</text><text x="730" y="216" text-anchor="middle" class="ink" font-size="12.5">+ OOM ladder: batch → model → method</text><text x="730" y="235" text-anchor="middle" class="ink" font-size="12.5">+ simplicity rule, REPORT.md from real rows</text></svg>
